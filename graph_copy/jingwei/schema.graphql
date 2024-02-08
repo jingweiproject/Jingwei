@@ -1,0 +1,18 @@
+type WareRoom @entity {
+  id: Bytes!
+  nft: Bytes!
+  jft: Bytes!
+  lockeNft: BigInt!
+  nftList: [NonFungibleToken!]!
+  time: BigInt!
+}
+
+type NonFungibleToken @entity {
+  id: Bytes!
+  address: Bytes!
+  name: string!
+  symbol: string!
+  tokenId: BigInt!
+  time: BigInt!
+}
+

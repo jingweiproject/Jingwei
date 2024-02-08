@@ -4,25 +4,15 @@ pragma solidity ^0.8.0;
 import "./JingweiFungibleToken.sol";
 import "@openzeppelin/contracts/interfaces/IERC721.sol";
 import "@openzeppelin/contracts/interfaces/IERC721Metadata.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-contract Jingwei is Initializable {
+contract Jingwei {
 
     event NftLocked(address token, uint256 tokenId);
     event NftReleased(address token, uint256 tokenId);
     event JftCreated(address token, address jft, uint256 jftLength);
 
-    address private admin;
     address[] public allJfts;
     mapping(address => address) public getJft;
-
-    function initialize(address _admin) initializer public {
-        admin = _admin;
-    }
-
-    function getAdmin() public view returns (address) {
-       return admin;
-    }
 
     function getJftsLength() external view returns (uint256) {
         return allJfts.length;

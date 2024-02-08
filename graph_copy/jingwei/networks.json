@@ -1,0 +1,11 @@
+{
+  "bsc": {
+    "Jingwei": {
+      "address": "0xF1f5e6e22ff4bd5946BcDAf3dD7B327372547a7F",
+      "startBlock": 35950122
+    },
+    "JingweiFungibleToken": {
+      "address": "0xBAC1aD480664B67c03cf74fe8DdbAFebe423069d"
+    }
+  }
+}

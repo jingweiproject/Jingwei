@@ -8,6 +8,7 @@ contract JingweiFungibleToken is Ownable, ERC20{
     
     event Mint(address account, uint256 value);
     event Burn(address account, uint256 value);
+    event Initialized(string name, string symbol);
 
     string private _name;
     string private _symbol;
@@ -23,6 +24,7 @@ contract JingweiFungibleToken is Ownable, ERC20{
         _name = name_;
         _symbol = symbol_;
         _initialized = true;
+        emit Initialized(name_, symbol_);
     }
 
     function mint(address account, uint256 value) public onlyOwner{

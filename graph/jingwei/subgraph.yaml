@@ -8,25 +8,25 @@ dataSources:
     name: Jingwei
     network: bsc
     source:
-      address: "0xF1f5e6e22ff4bd5946BcDAf3dD7B327372547a7F"
+      address: "0x81Ec6E444148b2c562f37FE52b155bC29Fd9b878"
       abi: Jingwei
-      startBlock: 35950122
+      startBlock: 35959431
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - AdminChanged
-        - BeaconUpgraded
-        - Upgraded
+        - JftCreated
+        - NftLocked
+        - NftReleased
       abis:
         - name: Jingwei
           file: ./abis/Jingwei.json
       eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: BeaconUpgraded(indexed address)
-          handler: handleBeaconUpgraded
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
+        - event: JftCreated(address,address,uint256)
+          handler: handleJftCreated
+        - event: NftLocked(address,uint256)
+          handler: handleNftLocked
+        - event: NftReleased(address,uint256)
+          handler: handleNftReleased
       file: ./src/jingwei.ts

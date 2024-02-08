@@ -1,0 +1,63 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Jingwei
+    network: bsc
+    source:
+      address: "0xF1f5e6e22ff4bd5946BcDAf3dD7B327372547a7F"
+      abi: Jingwei
+      startBlock: 35950122
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeaconUpgraded
+        - Upgraded
+      abis:
+        - name: Jingwei
+          file: ./abis/Jingwei.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/jingwei.ts
+templates:
+  - kind: ethereum
+    name: JingweiFungibleToken
+    network: bsc
+    source:
+      abi: JingweiFungibleToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Burn
+        - Mint
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: JingweiFungibleToken
+          file: ./abis/JingweiFungibleToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(address,uint256)
+          handler: handleBurn
+        - event: Mint(address,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/jingwei-fungible-token.ts

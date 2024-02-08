@@ -1,55 +1,74 @@
 import { newMockEvent } from "matchstick-as"
-import { ethereum, Address } from "@graphprotocol/graph-ts"
+import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts"
 import {
-  AdminChanged,
-  BeaconUpgraded,
-  Upgraded
+  JftCreated,
+  NftLocked,
+  NftReleased
 } from "../generated/Jingwei/Jingwei"
 
-export function createAdminChangedEvent(
-  previousAdmin: Address,
-  newAdmin: Address
-): AdminChanged {
-  let adminChangedEvent = changetype<AdminChanged>(newMockEvent())
+export function createJftCreatedEvent(
+  token: Address,
+  jft: Address,
+  jftLength: BigInt
+): JftCreated {
+  let jftCreatedEvent = changetype<JftCreated>(newMockEvent())
 
-  adminChangedEvent.parameters = new Array()
+  jftCreatedEvent.parameters = new Array()
 
-  adminChangedEvent.parameters.push(
+  jftCreatedEvent.parameters.push(
+    new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
+  )
+  jftCreatedEvent.parameters.push(
+    new ethereum.EventParam("jft", ethereum.Value.fromAddress(jft))
+  )
+  jftCreatedEvent.parameters.push(
     new ethereum.EventParam(
-      "previousAdmin",
-      ethereum.Value.fromAddress(previousAdmin)
-    )
-  )
-  adminChangedEvent.parameters.push(
-    new ethereum.EventParam("newAdmin", ethereum.Value.fromAddress(newAdmin))
-  )
-
-  return adminChangedEvent
-}
-
-export function createBeaconUpgradedEvent(beacon: Address): BeaconUpgraded {
-  let beaconUpgradedEvent = changetype<BeaconUpgraded>(newMockEvent())
-
-  beaconUpgradedEvent.parameters = new Array()
-
-  beaconUpgradedEvent.parameters.push(
-    new ethereum.EventParam("beacon", ethereum.Value.fromAddress(beacon))
-  )
-
-  return beaconUpgradedEvent
-}
-
-export function createUpgradedEvent(implementation: Address): Upgraded {
-  let upgradedEvent = changetype<Upgraded>(newMockEvent())
-
-  upgradedEvent.parameters = new Array()
-
-  upgradedEvent.parameters.push(
-    new ethereum.EventParam(
-      "implementation",
-      ethereum.Value.fromAddress(implementation)
+      "jftLength",
+      ethereum.Value.fromUnsignedBigInt(jftLength)
     )
   )
 
-  return upgradedEvent
+  return jftCreatedEvent
+}
+
+export function createNftLockedEvent(
+  token: Address,
+  tokenId: BigInt
+): NftLocked {
+  let nftLockedEvent = changetype<NftLocked>(newMockEvent())
+
+  nftLockedEvent.parameters = new Array()
+
+  nftLockedEvent.parameters.push(
+    new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
+  )
+  nftLockedEvent.parameters.push(
+    new ethereum.EventParam(
+      "tokenId",
+      ethereum.Value.fromUnsignedBigInt(tokenId)
+    )
+  )
+
+  return nftLockedEvent
+}
+
+export function createNftReleasedEvent(
+  token: Address,
+  tokenId: BigInt
+): NftReleased {
+  let nftReleasedEvent = changetype<NftReleased>(newMockEvent())
+
+  nftReleasedEvent.parameters = new Array()
+
+  nftReleasedEvent.parameters.push(
+    new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
+  )
+  nftReleasedEvent.parameters.push(
+    new ethereum.EventParam(
+      "tokenId",
+      ethereum.Value.fromUnsignedBigInt(tokenId)
+    )
+  )
+
+  return nftReleasedEvent
 }
