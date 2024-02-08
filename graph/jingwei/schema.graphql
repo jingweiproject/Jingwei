@@ -1,6 +1,21 @@
-type ExampleEntity @entity {
+type Platform @entity {
   id: Bytes!
-  count: BigInt!
-  token: Bytes! # address
-  jft: Bytes! # address
+  allJfts: BigInt!
 }
+
+type Wareroom @entity {
+  id: Bytes!
+  nft: Bytes!
+  jft: Bytes!
+  lockeNft: BigInt!
+  nftList: [NonFungibleToken!]!
+  time: BigInt!
+}
+
+type NonFungibleToken @entity {
+  id: String!
+  address: Bytes!
+  tokenId: BigInt!
+  time: BigInt!
+}
+

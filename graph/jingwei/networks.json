@@ -3,6 +3,9 @@
     "Jingwei": {
       "address": "0x81Ec6E444148b2c562f37FE52b155bC29Fd9b878",
       "startBlock": 35959431
+    },
+    "JingweiFungibleToken": {
+      "address": "0xFF7A49E94EEd587e15980dbFCf6587106630cBfB"
     }
   }
 }

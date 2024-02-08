@@ -30,3 +30,37 @@ dataSources:
         - event: NftReleased(address,uint256)
           handler: handleNftReleased
       file: ./src/jingwei.ts
+templates:
+  - kind: ethereum
+    name: JingweiFungibleToken
+    network: bsc
+    source:
+      abi: JingweiFungibleToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Burn
+        - Initialized
+        - Mint
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: JingweiFungibleToken
+          file: ./abis/JingweiFungibleToken.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(address,uint256)
+          handler: handleBurn
+        - event: Initialized(string,string)
+          handler: handleInitialized
+        - event: Mint(address,uint256)
+          handler: handleMint
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/jingwei-fungible-token.ts
